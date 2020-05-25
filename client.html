@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>websocket</title>
+</head>
+<body>
+  <input type="text" id="text">
+  <button onclick="send()">send</button>
+  <script>
+    let text = document.getElementById('text');
+    let ws = new WebSocket('ws://localhost:8080');
+
+    ws.onopen = () => ws.send('server');
+    ws.onmessage = event => console.log('onmessage', event.data);
+    function send() {
+      ws.send(text.value);
+      text.value = '';
+    }
+
+  </script>
+</body>
+</html>
